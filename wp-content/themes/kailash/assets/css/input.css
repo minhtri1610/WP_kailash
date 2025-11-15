@@ -1,0 +1,75 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    * {
+        font-family: 'Nunito Sans', sans-serif;
+    }
+
+    #menu-menu-language li img{
+        width: 20px!important;
+        height: 15px!important;
+    }
+
+    #menu-menu-language li>.active{
+        border-bottom: 2px solid #05654a;
+        padding-bottom: 3px;
+    }
+
+    #mobile-list-item{
+        position: absolute;
+        flex-flow: column;
+        background: #e7dcd0;
+        width: 100%;
+        min-height: 100vw;
+        z-index: 99;
+        top: 72px;
+    }
+    #mobile-list-item li a{
+        padding: 15px;
+        display: block;
+        border-bottom: 1px solid #222;
+        width: 100%;
+    }
+    #mobile-list-item li:last-child a{
+        border: unset;
+    }
+
+    #mobile-list-item li {
+        /* padding:15px; */
+        margin: 0px;
+    }
+    
+    #mobile-list-item li:hover{
+        background: #f3eee7;
+    }
+
+    #footer-menu li{
+        padding-right: 15px;
+    }
+
+    #footer-menu{
+        margin: 35px 0;
+    }
+
+    .footer-arrows{
+        width: 240px;
+    }
+
+    .footer-arrows::after {
+        height: 26.3em;
+        width: 15.8em;
+    }
+    .footer-arrows::after{
+        content: '';
+        background-image: url(./assets/images/footer_arrows.png);
+        display: block;
+        position: absolute;
+        background-repeat: no-repeat;
+        right: 0;
+        background-size: contain;
+        background-position: right;
+        top: 0;
+    }
+}

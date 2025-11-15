@@ -1,0 +1,52 @@
+Bzfsm38HRP7@mXY&RP
+admin_kailash
+
+email:
+admin@kailash.com.vn
+
+
+
+docker compose up -d
+
+npx tailwindcss -i ./assets/css/input.css -o ./style.css --watch
+
+
+
+css index phần insight
+list knowleade
+
+eperencer
+about us
+
+Làm sheet excel để biết cây thư mục nhân sự và experience
+
+
+
+Task: 
+- index: code menu mobile, footer, banner.
+- Tìm kiếm
+- Thông Báo
+- Dịch vụ
+
+
+Tìm kiếm 
+Sẽ tìm kiếm từ khóa có trong mục expirence
+
+nhân sự:
+- Core founder
+- Cố vấn
+- Cộng Sự
+
+Trong Expirence có 5 chủ đề, mỗi chủ đề sẽ là 1 page, mỗi chủ đề sẽ có các chủ đề con, mỗi chủ đề sẽ có bài viết knowledge
+Expirence
+1. Doanh nghiệp
+2. Dự án
+3. Kế toán - Kiểm toán
+4. Công nghệ
+5. Quản trị kinh doanh
+
+Bài viết sẽ được đánh dấu theo các category trên, trong category cha , có thể có các category con, trong category con sẽ có các category nhỏ khác
+
+Thêm chức năng:
+Cấp tài khoản cho cộng sự có thể đăng bài trong trang admin
+
