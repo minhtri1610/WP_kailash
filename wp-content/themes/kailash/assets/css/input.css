@@ -2,6 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'Gilda Display';
+  src: url('assets/fonts/GildaDisplay-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 2. Nunito Sans (Variable Font - Hỗ trợ nhiều độ đậm nhạt) */
+@font-face {
+  font-family: 'Nunito Sans';
+  src: url('assets/fonts/NunitoSans-VariableFont.ttf') format('truetype');
+  font-weight: 200 900; /* Variable font hỗ trợ dải weight này */
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 3. Nunito Sans (Italic) */
+@font-face {
+  font-family: 'Nunito Sans';
+  src: url('assets/fonts/NunitoSans-Italic.ttf') format('truetype');
+  font-weight: 200 900;
+  font-style: italic;
+  font-display: swap;
+}
+
 @layer base {
     * {
         font-family: 'Nunito Sans', sans-serif;

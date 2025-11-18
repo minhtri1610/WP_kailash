@@ -20,6 +20,13 @@ module.exports = {
       screens: {
         'xs': '475px',
       },
+      fontFamily: {
+        // Đặt tên class là font-gilda
+        'gilda': ['"Gilda Display"', 'serif'], 
+        
+        // Đặt tên class là font-nunito
+        'nunito': ['"Nunito Sans"', 'sans-serif'], 
+      },
     },
   },
   plugins: [],
