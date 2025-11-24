@@ -60,6 +60,8 @@ get_header(); // Tải file header.php
 
     <?php get_template_part( 'components/home/experience' ); ?>
 
+    <?php get_template_part( 'components/home/about' ); ?>
+
 </main>
 
 <?php

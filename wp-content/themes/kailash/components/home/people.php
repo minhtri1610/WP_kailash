@@ -11,7 +11,7 @@
                 <img src="<?php echo get_template_directory_uri(); ?>/assets/images/people/p_03.jpg" alt="" class="h-auto w-auto min-h-[800px] min-w-full relative max-h-100">
             </div>
         </div>
-        <div class="wapper-info-people mt-[5rem] col-span-2">
+        <div class="wapper-info-people mt-[5rem] col-span-2 ">
             <div class="content-info-people flex flex-col items-center justify-center">
                 <h2 class="text-5xl text-white font-extrabold">Tiêu đề</h2>
                 <div class="content-info text-white p-5 text-base">
@@ -49,7 +49,7 @@
         <div id="list-people" class="p-[3rem]">
             <div class="p-item mt-[2.5em]">
                 <div class="overflow-hidden mb-4 relative flex justify-center">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/people/person/Anh4x6.jpg" 
+                    <img src="https://dummyimage.com/200x250/737373/fff&text=200x250px" 
                         alt="Nguyen Van A"
                         class="w-[200px] h-[250px] object-cover transition-transform duration-500 group-hover:scale-105 border border-gray-300"
                     >
@@ -60,7 +60,7 @@
             </div>
             <div class="p-item mt-[2.5em]">
                 <div class="overflow-hidden mb-4 w-full relative flex justify-center">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/people/person/Anh4x6.jpg" 
+                    <img src="https://dummyimage.com/200x250/737373/fff&text=200x250px" 
                         alt="Nguyen Van A"
                         class="w-[200px] h-[250px] object-cover transition-transform duration-500 group-hover:scale-105"
                     >
@@ -71,7 +71,7 @@
             </div>
             <div class="p-item mt-[2.5em]">
                 <div class="overflow-hidden mb-4 w-full relative flex justify-center">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/people/person/Anh4x6.jpg" 
+                    <img src="https://dummyimage.com/200x250/737373/fff&text=200x250px" 
                         alt="Nguyen Van A"
                         class="w-[200px] h-[250px] object-cover transition-transform duration-500 group-hover:scale-105"
                     >
@@ -83,7 +83,7 @@
 
             <div class="p-item mt-[2.5em]">
                 <div class="overflow-hidden mb-4 w-full relative flex justify-center">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/people/person/Anh4x6.jpg" 
+                    <img src="https://dummyimage.com/200x250/737373/fff&text=200x250px" 
                         alt="Nguyen Van A"
                         class="w-[200px] h-[250px] object-cover transition-transform duration-500 group-hover:scale-105"
                     >
@@ -95,7 +95,7 @@
 
             <div class="p-item mt-[2.5em]">
                 <div class="overflow-hidden mb-4 w-full relative flex justify-center">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/people/person/Anh4x6.jpg" 
+                    <img src="https://dummyimage.com/200x250/737373/fff&text=200x250px" 
                         alt="Nguyen Van A"
                         class="w-[200px] h-[250px] object-cover transition-transform duration-500 group-hover:scale-105"
                     >

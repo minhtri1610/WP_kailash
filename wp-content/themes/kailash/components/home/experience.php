@@ -10,19 +10,19 @@
             </div>
         </div>
         <div class="col-span-2">
-            <div class="content-experience grid grid-cols-3 gap-2 ">
-                <div class="col-span-1">
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/home/experience/practices_pc.jpg" alt="">
-                </div>
+            <div class="content-experience grid grid-cols-5 gap-2 ">
                 <div class="col-span-2">
-                    <div class="count-knowledge">
-                        <h2 class="text-4xl font-bold text-black mb-6k">Knowledge</h2>
-                        <p>                <span class="text-[#125f4b] font-gilda text-[12rem] leading-none" counter-element="number">220</span>
+                    <img class="w-full h-full" src="<?php echo get_template_directory_uri(); ?>/assets/images/home/experience/practices_pc.jpg" alt="">
+                </div>
+                <div class="col-span-3">
+                    <a class="count-knowledge" href="#">
+                        <h2 class="text-4xl font-bold text-black mb-6k text-center">Knowledge</h2>
+                        <p class="text-right"><span class="text-[#125f4b] font-gilda text-[10rem] leading-none" counter-element="number">220</span>
 </p>
-                    </div>
-                    <div class="img-knowledge">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/home/experience/knowledge_pc.jpg" alt="">
-                    </div>
+</a>
+                    <a class="img-knowledge" href="#">
+                        <img class="w-full hover:opacity-60" src="<?php echo get_template_directory_uri(); ?>/assets/images/home/experience/knowledge_pc.jpg" alt="">
+                    </a>
                 </div>
             </div>
         </div>

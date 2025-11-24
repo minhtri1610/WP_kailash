@@ -12,7 +12,7 @@
                     <div class="kn-list-sub flex flex-wrap">
                         <span class="border rounded-xl outline-1 border-[#125f4b] px-2 my-2 text-base text-[#125f4b]">Thuế</span>
                     </div>
-                    <p class="text-[#0e0e0e] text-sm italic">2022-12-12</p>
+                    <p class="text-[#0e0e0e] text-sm italic"> <i class="fa-solid fa-calendar-days text-[#125f4b]"></i> 2022-12-12</p>
                 </div>
 
                 <div class="kn-item flex flex-col border-b border-gray-300 py-4">
@@ -20,7 +20,7 @@
                     <div class="kn-list-sub flex flex-wrap">
                         <span class="border rounded-xl outline-1 border-[#125f4b] px-2 my-2 text-base text-[#125f4b]">Báo cáo tài chính</span>
                     </div>
-                    <p class="text-[#0e0e0e] text-sm italic">2022-12-12</p>
+                    <p class="text-[#0e0e0e] text-sm italic"><i class="fa-solid fa-calendar-days text-[#125f4b]"></i> 2022-12-12</p>
                 </div>
 
                 <div class="kn-item flex flex-col border-b border-gray-300 py-4">
@@ -28,7 +28,7 @@
                     <div class="kn-list-sub flex flex-wrap">
                         <span class="border rounded-xl outline-1 border-[#125f4b] px-2 my-2 text-base text-[#125f4b]">Thuế</span>
                     </div>
-                    <p class="text-[#0e0e0e] text-sm italic">2022-12-12</p>
+                    <p class="text-[#0e0e0e] text-sm italic"><i class="fa-solid fa-calendar-days text-[#125f4b]"></i> 2022-12-12</p>
                 </div>
             </div>
         </div>
@@ -45,7 +45,7 @@
                     <div class="kn-list-sub flex flex-wrap">
                         <span class="border rounded-xl outline-1 border-[#125f4b] px-2 my-2 text-base text-[#125f4b]">Luật Thuế</span>
                     </div>
-                    <p class="text-[#0e0e0e] text-sm italic">2022-12-12</p>
+                    <p class="text-[#0e0e0e] text-sm italic"><i class="fa-solid fa-calendar-days text-[#125f4b]"></i> 2022-12-12</p>
                 </div>
 
                 <div class="kn-item flex flex-col border-b border-gray-300 py-4">
@@ -53,7 +53,7 @@
                     <div class="kn-list-sub flex flex-wrap">
                         <span class="border rounded-xl outline-1 border-[#125f4b] px-2 my-2 text-base text-[#125f4b]">Tố Tụng</span>
                     </div>
-                    <p class="text-[#0e0e0e] text-sm italic">2022-12-12</p>
+                    <p class="text-[#0e0e0e] text-sm italic"><i class="fa-solid fa-calendar-days text-[#125f4b]"></i> 2022-12-12</p>
                 </div>
 
                 <div class="kn-item flex flex-col border-b border-gray-300 py-4">
@@ -61,7 +61,7 @@
                     <div class="kn-list-sub flex flex-wrap">
                         <span class="border rounded-xl outline-1 border-[#125f4b] px-2 my-2 text-base text-[#125f4b]">Aviation Business</span>
                     </div>
-                    <p class="text-[#0e0e0e] text-sm italic">2022-12-12</p>
+                    <p class="text-[#0e0e0e] text-sm italic"><i class="fa-solid fa-calendar-days text-[#125f4b]"></i> 2022-12-12</p>
                 </div>
             </div>
         </div>
@@ -78,7 +78,7 @@
                     <div class="kn-list-sub flex flex-wrap">
                         <span class="border rounded-xl outline-1 border-[#125f4b] px-2 my-2 text-base text-[#125f4b]">AI</span>
                     </div>
-                    <p class="text-[#0e0e0e] text-sm italic">2022-12-12</p>
+                    <p class="text-[#0e0e0e] text-sm italic"><i class="fa-solid fa-calendar-days text-[#125f4b]"></i> 2022-12-12</p>
                 </div>
 
                 <div class="kn-item flex flex-col border-b border-gray-300 py-4">
@@ -86,7 +86,7 @@
                     <div class="kn-list-sub flex flex-wrap">
                         <span class="border rounded-xl outline-1 border-[#125f4b] px-2 my-2 text-base text-[#125f4b]">AI</span>
                     </div>
-                    <p class="text-[#0e0e0e] text-sm italic">2022-12-12</p>
+                    <p class="text-[#0e0e0e] text-sm italic"><i class="fa-solid fa-calendar-days text-[#125f4b]"></i> 2022-12-12</p>
                 </div>
 
                 <div class="kn-item flex flex-col border-b border-gray-300 py-4">
@@ -94,7 +94,7 @@
                     <div class="kn-list-sub flex flex-wrap">
                         <span class="border rounded-xl outline-1 border-[#125f4b] px-2 my-2 text-base text-[#125f4b]">Chuyển đổi số</span>
                     </div>
-                    <p class="text-[#0e0e0e] text-sm italic">2022-12-12</p>
+                    <p class="text-[#0e0e0e] text-sm italic"><i class="fa-solid fa-calendar-days text-[#125f4b]"></i> 2022-12-12</p>
                 </div>
             </div>
         </div>

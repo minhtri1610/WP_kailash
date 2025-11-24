@@ -59,7 +59,7 @@
 			fade: true,
 			dotsClass: 'slick-dots',
 			arrows: false,
-			autoplay: false,
+			autoplay: true,
 			autoplaySpeed: 3000,
         });
 
@@ -75,7 +75,7 @@
 			infinite: true,
 			slidesToShow: 4,
 			slidesToScroll: 1,
-			autoplay: false,
+			autoplay: true,
 			autoplaySpeed: 1000,
 		});
 		
