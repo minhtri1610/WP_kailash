@@ -9,7 +9,7 @@
  * @package kailash
  */
 ?>
-	<footer class="bg-gradient-to-b from-[#016549] to-[#003425] pt-10 relative">
+	<footer id="site-footer" class="bg-gradient-to-b from-[#016549] to-[#003425] pt-10 relative">
 		<div class="wapper-footer container">
 			<div class="list-menu border-b border-b-[#C4C4C4]/20">
 				<?php
@@ -42,7 +42,12 @@
 		<div class="footer-arrows">
 
 		</div>
+
+		<a id="backToTop" href="#" class="fixed right-10 z-50 hidden p-3 transition-opacity duration-300"
+    style="bottom: 20px;">Page Top</a>
 	</footer>
+
+	
 </div><!-- #page -->
 
 <?php wp_footer(); ?>
@@ -175,6 +180,75 @@
 			});
 		});
 	})();
+</script>
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		const backToTopBtn = document.getElementById('backToTop');
+		const footer = document.getElementById('site-footer');
+		
+		// Cấu hình khoảng cách
+		const defaultBottom = 20; // Cách đáy màn hình 20px khi ở trạng thái bình thường
+		const offsetFromFooter = 20; // Cách mép trên của footer 20px khi chạm footer
+
+		// Hàm cập nhật vị trí nút
+		const updateButtonPosition = () => {
+			// 1. Logic Ẩn/Hiện
+			if (window.scrollY > 300) {
+				backToTopBtn.classList.remove('hidden');
+				// Thêm chút delay nhỏ để transition opacity hoạt động nếu muốn
+			} else {
+				backToTopBtn.classList.add('hidden');
+			}
+
+			// 2. Logic Tránh Footer (Quan trọng)
+			if (footer) {
+				// Lấy vị trí của footer so với viewport hiện tại
+				const footerRect = footer.getBoundingClientRect();
+				const windowHeight = window.innerHeight;
+
+				// Nếu đỉnh của footer nằm trong vùng nhìn thấy (viewport)
+				if (footerRect.top < windowHeight) {
+					// Tính toán khoảng cách nút bị đẩy lên
+					// Công thức: (Chiều cao màn hình - Vị trí đỉnh footer) + Khoảng cách mong muốn
+					const newBottom = (windowHeight - footerRect.top) + offsetFromFooter;
+					backToTopBtn.style.bottom = `${newBottom}px`;
+				} else {
+					// Nếu chưa thấy footer, reset về vị trí mặc định
+					backToTopBtn.style.bottom = `${defaultBottom}px`;
+				}
+			}
+		};
+
+		// Hàm cuộn mượt (Custom Animation) - Đảm bảo mượt trên mọi trình duyệt
+		const smoothScrollToTop = () => {
+			const startPosition = window.scrollY;
+			const targetPosition = 0;
+			const distance = targetPosition - startPosition;
+			const duration = 500; // Tốc độ cuộn (ms)
+			let startTime = null;
+
+			function animation(currentTime) {
+				if (startTime === null) startTime = currentTime;
+				const timeElapsed = currentTime - startTime;
+				const run = easeOutCubic(timeElapsed, startPosition, distance, duration);
+				window.scrollTo(0, run);
+				if (timeElapsed < duration) requestAnimationFrame(animation);
+			}
+
+			function easeOutCubic(t, b, c, d) {
+				t /= d;
+				t--;
+				return c * (t * t * t + 1) + b;
+			}
+
+			requestAnimationFrame(animation);
+		};
+
+		// Gắn sự kiện
+		window.addEventListener('scroll', updateButtonPosition);
+		window.addEventListener('resize', updateButtonPosition); // Cập nhật khi xoay màn hình/resize
+		backToTopBtn.addEventListener('click', smoothScrollToTop);
+	});
 </script>
 </body>
 </html>

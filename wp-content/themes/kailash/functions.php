@@ -179,6 +179,71 @@ function add_tailwind_classes_to_a($atts, $item, $args) {
 }
 add_filter('nav_menu_link_attributes', 'add_tailwind_classes_to_a', 10, 3);
 
+
+function my_remove_admin_menus() {
+    // --- Các menu mặc định của WordPress ---
+    
+    // remove_menu_page( 'index.php' );                  // Dashboard (Bảng tin)
+    remove_menu_page( 'edit.php' );                   // Posts (Bài viết)
+    remove_menu_page( 'upload.php' );                 // Media (Thư viện)
+    // remove_menu_page( 'edit.php?post_type=page' );    // Pages (Trang)
+    remove_menu_page( 'edit-comments.php' );          // Comments (Bình luận) - Thường ẩn cái này
+    
+    // remove_menu_page( 'themes.php' );                 // Appearance (Giao diện)
+    // remove_menu_page( 'plugins.php' );                // Plugins (Gói mở rộng)
+    // remove_menu_page( 'users.php' );                  // Users (Thành viên)
+    // remove_menu_page( 'tools.php' );                  // Tools (Công cụ)
+    // remove_menu_page( 'options-general.php' );        // Settings (Cài đặt)
+    
+    // --- Ví dụ ẩn Plugin (xem cách lấy slug ở mục 3 bên dưới) ---
+    // remove_menu_page( 'wpcf7' );                      // Contact Form 7
+    remove_menu_page( 'woocommerce' );                // WooCommerce
+}
+add_action( 'admin_menu', 'my_remove_admin_menus' );
+
+
+
+/**
+ * 1. Đổi Logo trang Login
+ */
+function my_custom_login_logo() {
+    // Đường dẫn đến file logo của bạn.
+    // Ví dụ: theme-cua-ban/assets/images/logo-login.png
+    $logo_url = get_stylesheet_directory_uri() . '/assets/images/logo-green.png'; 
+    ?>
+    <style type="text/css">
+        #login h1 a, .login h1 a {
+            background-image: url(<?php echo $logo_url; ?>);
+            /* WordPress mặc định kích thước logo là 84x84px. 
+               Nếu logo bạn là hình chữ nhật ngang, hãy chỉnh lại height/width và background-size bên dưới */
+            height: 100px; /* Chiều cao logo */
+            width: 320px;  /* Chiều rộng tối đa của khung login */
+            background-size: contain; /* Co dãn ảnh cho vừa khung */
+            background-repeat: no-repeat;
+            background-position: center;
+            padding-bottom: 30px;
+        }
+    </style>
+    <?php
+}
+add_action( 'login_enqueue_scripts', 'my_custom_login_logo' );
+
+/**
+ * 2. Đổi Link khi click vào Logo (Trỏ về trang chủ thay vì WordPress.org)
+ */
+function my_login_logo_url() {
+    return home_url();
+}
+add_filter( 'login_headerurl', 'my_login_logo_url' );
+
+/**
+ * 3. Đổi dòng chữ Title khi di chuột vào Logo (Thay vì "Powered by WordPress")
+ */
+function my_login_logo_url_title() {
+    return get_bloginfo( 'name' );
+}
+add_filter( 'login_headertext', 'my_login_logo_url_title' );
+
 /**
  * Implement the Custom Header feature.
  */

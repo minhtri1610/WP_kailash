@@ -200,3 +200,22 @@ ul.list_arrow li a:before {
     top: 0.5em;
     bottom: auto;
 }
+
+#backToTop{
+    text-align: center;
+    width: 4rem;
+    height: 2.8125rem;
+    padding: 1.5625rem 0 0;
+    background-image: url(./assets/images/icons/go-top.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    background-size: 86%;
+    background-position: top center;
+    font-size: 14px;
+    white-space: nowrap;
+    -webkit-transition: 0.3s all 
+linear;
+    transition: 0.3s all 
+linear;
+}

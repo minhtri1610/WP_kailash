@@ -28,6 +28,8 @@ add_action('init', function() {
     pll_register_string('Our Partners', 'Đối tác tiêu biểu', $group);
     pll_register_string('Read More', 'Xem thêm', $group);
     pll_register_string('Contact Us', 'Liên hệ', $group);
+
+    pll_register_string('Home', 'Trang chủ', $group_home);
     
     // Các chuỗi bạn vừa thêm cho front-page
     pll_register_string('Homepage Hero Title', 'Viện Kailash', $group);
@@ -72,5 +74,8 @@ add_action('init', function() {
     pll_register_string('More Details', 'btn_view_more', $group_home);
     pll_register_string('Locations', 'Địa điểm', $group_home);
     pll_register_string('Professionals', 'Chuyên gia', $group_home);
+
+    pll_register_string('experience_slug', 'Dịch vụ URL', $group_home);
+
 
 });

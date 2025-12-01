@@ -12,11 +12,12 @@
 
 ?>
 <!doctype html>
-<html <?php language_attributes(); ?>>
+<html <?php language_attributes(); ?> class="scroll-smooth">
 
 <head>
 	<meta charset="<?php bloginfo('charset'); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="<?php echo get_template_directory_uri(); ?>/assets/images/icons/favicon-32x32.png" type="image/x-icon">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
 	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
@@ -32,12 +33,15 @@
 		<!-- pc nav -->
 		<nav class="bg-white border-b border-gray-200 hidden sm:flex flex-row" id="menu-pc">
 			<div class="logo basis-1/6 flex justify-center items-center">
-				<img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo-crop.png" alt="" class="w-[170px] mt-[25px]">
+				<a href="<?php echo home_url(); ?>">
+					<img src="<?php echo get_template_directory_uri(); ?>/assets/images/logo-crop.png" alt="" class="w-[170px] mt-[25px]">
+				</a>
 			</div>
 			<div class="menu basis-4/6 flex items-center justify-center flex-col">
 				<!-- language nav -->
 				<section class="mb-3 self-end flex items-center">
 					<span class="mr-3"><i class="fa-solid fa-mobile-screen-button"></i> 0900 123 456 | </span>
+					<a class="mr-3" href="<?php echo home_url('/wp-login.php'); ?>"><i class="fa-solid fa-right-to-bracket"></i></a>
 					<?php
 						wp_nav_menu(array(
 							'theme_location' => 'lang_menu',
