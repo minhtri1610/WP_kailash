@@ -21,6 +21,8 @@ add_action('init', function() {
     // Đăng ký chuỗi và nhóm chúng vào 'kailash' (tên theme)
     $group = 'kailash';
 
+    $group_home = 'home page';
+
     pll_register_string('Recent Projects', 'Dự án gần đây', $group);
     pll_register_string('Featured Services', 'Dịch vụ nổi bật', $group);
     pll_register_string('Our Partners', 'Đối tác tiêu biểu', $group);
@@ -30,8 +32,45 @@ add_action('init', function() {
     // Các chuỗi bạn vừa thêm cho front-page
     pll_register_string('Homepage Hero Title', 'Viện Kailash', $group);
     pll_register_string('Homepage Hero Subtitle', 'Tư vấn chuyên nghiệp - Giải pháp tin cậy', $group);
-    pll_register_string('Associates', 'Cộng sự', $group);
+
     pll_register_string('Projects', 'Dự án', $group);
     pll_register_string('No services found', 'Chưa có dịch vụ nào.', $group);
+
+    //page dịch vụ
+    pll_register_string('Experience', 'Dịch vụ', $group);
+    pll_register_string('View detail', 'Xem chi tiết', $group);
+
+    //page cộng sự
+    pll_register_string('Knowledge', 'Kiến thức', $group);
+
+    //page cộng sự
+    pll_register_string('People', 'Cộng sự', $group);
+
+    //insights
+    pll_register_string('Insight', 'Góc nhìn', $group);
+
+    // page dự án gần đây
+    pll_register_string('Recent Work', 'Dự án gần đây', $group);
+
+    // page about us
+    pll_register_string('About us', 'Giới thiệu', $group);
+
+    // page liên hệ
+    pll_register_string('Contact', 'Liên hệ', $group);
+
+    //search
+    pll_register_string('Find People', 's_tieu_de_tim_kiem', $group_home);
+    pll_register_string('Search Placeholder', 's_placeholder_tim_kiem', $group_home);
+
+    //footer
+    pll_register_string('Tax Code', 'Mã số thuế', $group_home);
+    pll_register_string('Hotline', 'Liên hệ', $group_home);
+    pll_register_string('Address', 'Địa chỉ', $group_home);
+    pll_register_string('Email', 'Email', $group_home);
+
+    //banner
+    pll_register_string('More Details', 'btn_view_more', $group_home);
+    pll_register_string('Locations', 'Địa điểm', $group_home);
+    pll_register_string('Professionals', 'Chuyên gia', $group_home);
 
 });

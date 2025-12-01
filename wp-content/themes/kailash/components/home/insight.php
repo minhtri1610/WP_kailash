@@ -1,5 +1,5 @@
 <section class="container mt-[3em]" id="insight">
-    <h2 class="text-4xl font-bold text-black mb-6">Insight</h2>
+    <h2 class="text-4xl font-bold text-black mb-6"><?php pll_e('Góc nhìn') ?></h2>
     <div class="wapper-insight grid grid-cols-3 gap-4">
         <div class="left-insight col-span-2 h-full">
             <a class="insight-item relative h-full" href="#">

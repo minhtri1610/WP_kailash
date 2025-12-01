@@ -20,7 +20,7 @@ get_header(); // Tải file header.php
         <div class="wapper-search grid grid-cols-3 bg-[#2b2b2b] gap-1 absolute -top-[60px]">
             <div class="col-span-1 p-4 border-r border-[#555555]"> 
                 <div class="p-4 text-white">
-                    <h2 class="text-3xl font-bold mb-4"><?php pll_e('Tìm Kiếm'); ?></h2>
+                    <h2 class="text-3xl font-bold mb-4"><?php pll_e('s_tieu_de_tim_kiem'); ?></h2>
                     <div class="desc-find">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Error nemo atque corporis. Quod id dignissimos dicta totam sint placeat delectus expedita natus?
                     </div>
@@ -28,7 +28,7 @@ get_header(); // Tải file header.php
             </div>
             <div class="col-span-2 p-4 flex align-center justify-center items-center">
                 <div class="el-search flex align-center items-center w-[80%] relative">
-                    <input type="text" class="w-full px-4 py-4 bg-[#414141] text-white text-base outline-none" placeholder="<?php pll_e('Tìm theo tên, từ khóa...'); ?>">
+                    <input type="text" class="w-full px-4 py-4 bg-[#414141] text-white text-base outline-none" placeholder="<?php pll_e('s_placeholder_tim_kiem'); ?>">
                     <button type="submit" class="text-white absolute right-4">
                         <svg 
                         xmlns="http://www.w3.org/2000/svg" 
@@ -59,6 +59,8 @@ get_header(); // Tải file header.php
     <?php get_template_part( 'components/home/people' ); ?>
 
     <?php get_template_part( 'components/home/experience' ); ?>
+
+    <?php get_template_part( 'components/home/recent-work' ); ?>
 
     <?php get_template_part( 'components/home/about' ); ?>
 

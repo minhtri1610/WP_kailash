@@ -1,12 +1,35 @@
 <?php
-    /**
-     * Template Name: Trang Liên Hệ
-     * @package kailash
-     */
-    get_header(); // Tải file header.php
+/**
+ * Template Name: Contact
+ *
+ * Trang này hiển thị trang liên hệ
+ *
+ * @package kailash
+ */
+
+get_header(); // Tải file header.php
 ?>
 
-<h1 class="text-4xl font-bold"><?php the_title(); ?></h1>
-<div class="my-custom-tailwind-wrapper">
-    <?php echo do_shortcode('[contact-form-7 id="123" title="Form Liên Hệ"]'); ?>
+<div class="wapper-list-experience">
+    <div class="container c-list-experience mb-[100px]">
+        <div class="head-list-experience">
+            <h2 class="text-4xl font-semibold text-black my-[3rem]"><?php pll_e('Liên hệ') ?> </h2>
+        </div>
+
+        <div class="content-list-experience">
+            <div class="desc-list-member mb-[3rem]">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatibus saepe quas suscipit commodi voluptates, omnis sit repudiandae sed nobis! Illo, accusamus! Quidem reiciendis totam quas repellendus molestias excepturi vel magnam!
+            </div>
+
+            <div class="content-list-experience space-y-16">
+                Page đang phát triển
+                
+            </div>
+        </div>
+    </div>
+
 </div>
+
+<?php
+get_footer(); // Tải file footer.php
+?>

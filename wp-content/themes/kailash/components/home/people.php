@@ -24,7 +24,7 @@
         <!-- <div class="line-count flex w-full text-center my-0 mx-auto"> -->
         <div class="line-count flex w-full justify-center items-baseline gap-15 mx-auto">
             <div class="text-gray-700 flex items-baseline gap-2">
-                <span class="text-white font-gilda text-[3rem] mr-2 -translate-y-1">Locations</span>
+                <span class="text-white font-gilda text-[3rem] mr-2 -translate-y-1"><?php pll_e('Địa điểm'); ?></span>
                 
                 <span class="text-white font-gilda text-[12rem] leading-none" counter-element="number">22</span>
                 
@@ -35,7 +35,7 @@
             <div class="w-[1px] h-[10rem] bg-white rotate-[20deg] translate-y-8 ml-4"></div>
 
             <div class="text-gray-700 ml-4 flex items-baseline gap-2">
-                <span class="text-white font-gilda text-[3rem] mr-2 -translate-y-1">Professionals</span>
+                <span class="text-white font-gilda text-[3rem] mr-2 -translate-y-1"><?php pll_e('Chuyên gia'); ?></span>
                 
                 <span class="text-white font-gilda text-[12rem] leading-none" counter-element="number">100</span>
                 

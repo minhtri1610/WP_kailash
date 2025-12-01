@@ -212,3 +212,6 @@ require get_template_directory() . '/inc/post-types.php';
  * Tải các hàm tùy chỉnh của Polylang.
  */
 require get_template_directory() . '/inc/polylang.php';
+
+// breadcrum
+require get_template_directory() . '/inc/breadcrumb.php';

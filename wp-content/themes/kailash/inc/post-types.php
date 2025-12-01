@@ -1,53 +1,126 @@
 <?php
-
 /**
- * Đăng ký Custom Post Types (Dịch vụ & Cộng sự)
+ * Register Custom Post Types
  */
-function kailash_register_post_types() {
-    
-    // 1. CPT cho Dịch vụ (Service)
-    $service_labels = array(
-        'name'          => _x( 'Dịch vụ', 'Post Type General Name', 'kailash' ),
-        'singular_name' => _x( 'Dịch vụ', 'Post Type Singular Name', 'kailash' ),
-        'menu_name'     => __( 'Dịch vụ', 'kailash' ),
-        'all_items'     => __( 'Tất cả dịch vụ', 'kailash' ),
-        'add_new_item'  => __( 'Thêm dịch vụ mới', 'kailash' ),
-        'add_new'       => __( 'Thêm mới', 'kailash' ),
-    );
-    $service_args = array(
-        'label'         => __( 'Dịch vụ', 'kailash' ),
-        'labels'        => $service_labels,
-        'supports'      => array( 'title', 'editor', 'thumbnail', 'excerpt', 'revisions' ),
-        'public'        => true,
-        'show_in_menu'  => true,
-        'menu_position' => 5,
-        'menu_icon'     => 'dashicons-briefcase',
-        'has_archive'   => true, // Kích hoạt trang archive-service.php
-        'rewrite'       => array( 'slug' => 'dich-vu' ), // Đường dẫn
-    );
-    register_post_type( 'service', $service_args );
 
-    // 2. CPT cho Cộng sự (Team Member)
-    $team_labels = array(
-        'name'          => _x( 'Cộng sự', 'Post Type General Name', 'kailash' ),
-        'singular_name' => _x( 'Cộng sự', 'Post Type Singular Name', 'kailash' ),
-        'menu_name'     => __( 'Đội ngũ Cộng sự', 'kailash' ),
-        'all_items'     => __( 'Tất cả cộng sự', 'kailash' ),
-        'add_new_item'  => __( 'Thêm cộng sự mới', 'kailash' ),
-        'add_new'       => __( 'Thêm mới', 'kailash' ),
-    );
-    $team_args = array(
-        'label'         => __( 'Cộng sự', 'kailash' ),
-        'labels'        => $team_labels,
-        'supports'      => array( 'title', 'editor', 'thumbnail' ), // Tí nữa ta sẽ thêm custom fields
-        'public'        => true,
-        'show_in_menu'  => true,
-        'menu_position' => 6,
-        'menu_icon'     => 'dashicons-groups',
-        'has_archive'   => true, // Kích hoạt trang archive-team_member.php
-        'rewrite'       => array( 'slug' => 'cong-su' ), // Đường dẫn
-    );
-    register_post_type( 'team_member', $team_args );
+function register_my_cpts() {
+    // 1. CPT Experience (Phân cấp cha/con) -> URL: /dich-vu/
+    register_post_type( 'experience', array(
+        'labels' => array( 
+            'name' => 'Experience', 
+            'singular_name' => 'Experience',
+            'menu_name' => 'Experience'
+        ),
+        'public' => true,
+        'hierarchical' => true, // QUAN TRỌNG: Cho phép tạo cấp cha/con (Level 1 > Level 2)
+        'supports' => array( 'title', 'editor', 'thumbnail', 'page-attributes', 'excerpt' ),
+        'has_archive' => true,
+        'rewrite' => array('slug' => 'dich-vu', 'with_front' => false), // Sửa slug thành 'dich-vu'
+        'show_in_rest' => true, // Bật Gutenberg Editor (Nên dùng)
+        'menu_icon' => 'dashicons-awards',
+    ));
 
+    // 2. CPT People (Nhân sự) -> URL: /cong-su/
+    register_post_type( 'people', array(
+        'labels' => array( 
+            'name' => 'People', 
+            'singular_name' => 'Person',
+            'menu_name' => 'People'
+        ),
+        'public' => true,
+        'supports' => array( 'title', 'thumbnail', 'excerpt', 'editor' ), 
+        'has_archive' => true, // Bật trang lưu trữ
+        'rewrite' => array('slug' => 'cong-su', 'with_front' => false), // Sửa slug thành 'cong-su'
+        'show_in_rest' => true,
+        'menu_icon' => 'dashicons-businessperson',
+    ));
+
+    // 3. CPT Knowledge (Kiến thức/Tin tức) -> URL: /kien-thuc/
+    register_post_type( 'knowledge', array(
+        'labels' => array( 
+            'name' => 'Knowledge', 
+            'singular_name' => 'Knowledge',
+            'menu_name' => 'Knowledge'
+        ),
+        'public' => true,
+        'supports' => array( 'title', 'editor', 'thumbnail', 'excerpt' ),
+        'has_archive' => true, // Bật trang lưu trữ
+        'rewrite' => array('slug' => 'kien-thuc', 'with_front' => false), // Sửa slug thành 'kien-thuc'
+        'show_in_rest' => true,
+        'menu_icon' => 'dashicons-book',
+    ));
 }
-add_action( 'init', 'kailash_register_post_types', 0 );
+add_action( 'init', 'register_my_cpts' );
+
+// function register_my_cpts() {
+//     // 1. CPT Experience (Phân cấp cha/con)
+//     // Cấu trúc mong muốn: Experience (Archive) > Level 1 (Parent) > Level 2 (Child)
+//     register_post_type( 'experience', array(
+//         'labels' => array( 
+//             'name' => 'Experience', 
+//             'singular_name' => 'Experience',
+//             'menu_name' => 'Experience'
+//         ),
+//         'public' => true,
+//         'hierarchical' => true, // QUAN TRỌNG: Cho phép tạo cấp cha/con (Level 1 > Level 2)
+//         'supports' => array( 'title', 'editor', 'thumbnail', 'page-attributes', 'excerpt' ),
+//         'has_archive' => true,
+//         'rewrite' => array('slug' => 'experience'),
+//         'show_in_rest' => true, // Bật Gutenberg Editor (Nên dùng)
+//         'menu_icon' => 'dashicons-awards',
+//     ));
+
+//     // 2. CPT People (Nhân sự)
+//     register_post_type( 'people', array(
+//         'labels' => array( 
+//             'name' => 'People', 
+//             'singular_name' => 'Person',
+//             'menu_name' => 'People'
+//         ),
+//         'public' => true,
+//         'supports' => array( 'title', 'thumbnail', 'excerpt', 'editor' ), 
+//         'show_in_rest' => true,
+//         'menu_icon' => 'dashicons-businessperson',
+//     ));
+
+//     // 3. CPT Knowledge (Kiến thức/Tin tức)
+//     register_post_type( 'knowledge', array(
+//         'labels' => array( 
+//             'name' => 'Knowledge', 
+//             'singular_name' => 'Knowledge',
+//             'menu_name' => 'Knowledge'
+//         ),
+//         'public' => true,
+//         'supports' => array( 'title', 'editor', 'thumbnail', 'excerpt' ),
+//         'show_in_rest' => true,
+//         'menu_icon' => 'dashicons-book',
+//     ));
+// }
+// add_action( 'init', 'register_my_cpts' );
+
+// function register_my_cpts() {
+//     // 1. CPT Experience (Phân cấp cha/con)
+//     register_post_type( 'experience', array(
+//         'labels' => array( 'name' => 'Experience', 'singular_name' => 'Experience' ),
+//         'public' => true,
+//         'hierarchical' => true, // QUAN TRỌNG: Cho phép cấp cha/con
+//         'supports' => array( 'title', 'editor', 'thumbnail', 'page-attributes', 'excerpt' ),
+//         'has_archive' => true,
+//         'rewrite' => array('slug' => 'experience'),
+//     ));
+
+//     // 2. CPT People (Nhân sự)
+//     register_post_type( 'people', array(
+//         'labels' => array( 'name' => 'People', 'singular_name' => 'Person' ),
+//         'public' => true,
+//         'supports' => array( 'title', 'thumbnail', 'excerpt' ), // Không cần hierarchical
+//     ));
+
+//     // 3. CPT Knowledge (Kiến thức/Tin tức)
+//     register_post_type( 'knowledge', array(
+//         'labels' => array( 'name' => 'Knowledge', 'singular_name' => 'Knowledge' ),
+//         'public' => true,
+//         'supports' => array( 'title', 'editor', 'thumbnail', 'excerpt' ),
+//     ));
+// }
+// add_action( 'init', 'register_my_cpts' );

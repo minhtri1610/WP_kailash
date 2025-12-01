@@ -1,8 +1,8 @@
 <?php
 /**
- * Template Name: About us
+ * Template Name: Archive Knowledge
  *
- * Trang này hiển thị trang giới thiệu
+ * Trang này hiển thị danh sách tất cả "Dịch vụ".
  *
  * @package kailash
  */
@@ -13,7 +13,7 @@ get_header(); // Tải file header.php
 <div class="wapper-list-experience">
     <div class="container c-list-experience mb-[100px]">
         <div class="head-list-experience">
-            <h2 class="text-4xl font-semibold text-black my-[3rem]"><?php pll_e('Giới thiệu') ?> </h2>
+            <h2 class="text-4xl font-semibold text-black my-[3rem]"><?php pll_e('Kiến thức') ?> </h2>
         </div>
 
         <div class="content-list-experience">
@@ -22,7 +22,7 @@ get_header(); // Tải file header.php
             </div>
 
             <div class="content-list-experience space-y-16">
-               Thông tin đang cập nhật
+                Danh sách đang cập nhật
                 
             </div>
         </div>

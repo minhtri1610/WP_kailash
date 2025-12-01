@@ -98,4 +98,105 @@
         background-position: right;
         top: 0;
     }
+
+    .link.right a {
+        margin-left: auto;
+    }
+
+    .link a {
+        display: block;
+        width: 10em;
+        padding-right: 0.8em;
+        position: relative;
+        border-bottom: #2b2b2b 1px solid;
+    }
+
+    .link a:before {
+        position: absolute;
+        content: "";
+        vertical-align: middle;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        width: 0.4em;
+        height: 0.4em;
+        border-top: 1px solid #0e0e0e;
+        border-right: 1px solid #0e0e0e;
+        -webkit-transform: rotate(45deg);
+        transform: rotate(45deg);
+        pointer-events: none;
+        right: 0.25em;
+        top: -2px;
+    }
+
+    .view-white a{
+        color: #fff;
+    }
+
+    .view-white a{
+        border-color: #fff;
+    }
+
+    .view-white a:before {
+        border-top: 1px solid #fff;
+        border-right: 1px solid #fff;
+    }
+}
+
+.sub-menu{
+    /* display: none;
+    position: absolute;
+    top: 90px;
+     */
+    background: #e6dccf;
+    min-width: 270px;
+    position: absolute;
+    top: 120%; /* Đẩy thấp xuống một chút để tạo hiệu ứng trượt lên */
+    /* left: 0; */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    
+    /* Trạng thái ẩn */
+    opacity: 0;
+    visibility: hidden;
+    
+    /* Hiệu ứng chuyển động */
+    transition: all 0.3s ease-in-out;
+    z-index: 100;
+}
+
+.menu-item-has-children:hover .sub-menu {
+  top: 100%; /* Trượt về đúng vị trí */
+  opacity: 1;
+  visibility: visible;
+}
+
+.sub-menu li{
+    padding: 10px 0;
+}
+
+.sub-menu li:hover{
+    background-color: #fff;
+}
+
+ul.list_arrow li{
+    position: relative;
+}
+
+ul.list_arrow li a:before {
+    position: absolute;
+    content: "";
+    vertical-align: middle;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: 0.3em;
+    height: 0.3em;
+    border-top: 1px solid #0e0e0e;
+    border-right: 1px solid #0e0e0e;
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    pointer-events: none;
+    left: 0;
+    top: 0.5em;
+    bottom: auto;
 }
