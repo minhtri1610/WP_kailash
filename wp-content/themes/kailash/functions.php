@@ -244,6 +244,13 @@ function my_login_logo_url_title() {
 }
 add_filter( 'login_headertext', 'my_login_logo_url_title' );
 
+function kailash_change_posts_per_page( $query ) {
+    if ( !is_admin() && $query->is_main_query() && is_post_type_archive( 'people' ) ) {
+        $query->set( 'posts_per_page', 12 );
+    }
+}
+add_action( 'pre_get_posts', 'kailash_change_posts_per_page' );
+
 /**
  * Implement the Custom Header feature.
  */

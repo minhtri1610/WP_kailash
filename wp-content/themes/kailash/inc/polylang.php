@@ -63,6 +63,7 @@ add_action('init', function() {
     //search
     pll_register_string('Find People', 's_tieu_de_tim_kiem', $group_home);
     pll_register_string('Search Placeholder', 's_placeholder_tim_kiem', $group_home);
+    pll_register_string('Search Description', 's_mo_ta_tim_kiem', $group_home);
 
     //footer
     pll_register_string('Tax Code', 'Mã số thuế', $group_home);
@@ -77,5 +78,7 @@ add_action('init', function() {
 
     pll_register_string('experience_slug', 'Dịch vụ URL', $group_home);
 
+    pll_register_string('Find not found', 'Không tìm thấy', $group);
+    pll_register_string('View all people', 'Xem tất cả', $group_home);
 
 });

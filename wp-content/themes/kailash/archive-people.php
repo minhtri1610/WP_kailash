@@ -8,6 +8,101 @@
  */
 
 get_header(); 
+
+// 1. CẤU HÌNH & LẤY THAM SỐ
+// -----------------------------------------------------------
+$paged = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : ( ( get_query_var( 'page' ) ) ? get_query_var( 'page' ) : 1 );
+
+// Lấy tham số từ URL
+$keyword = isset($_GET['keyword']) ? sanitize_text_field($_GET['keyword']) : '';
+$experience_filter = isset($_GET['experience_filter']) ? sanitize_text_field($_GET['experience_filter']) : '';
+
+// Mảng chứa các ID bài viết tìm được
+$final_post_ids = []; 
+$has_search = false; // Cờ đánh dấu có thực hiện tìm kiếm hay không
+
+// 2. XỬ LÝ TÌM KIẾM (Nếu có keyword)
+// -----------------------------------------------------------
+if ( !empty($keyword) ) {
+    $has_search = true;
+
+    // A. Tìm theo TÊN (Title) & Nội dung
+    $args_title = array(
+        'post_type' => 'people',
+        's'         => $keyword,
+        'fields'    => 'ids', // Chỉ lấy ID cho nhẹ
+        'posts_per_page' => -1
+    );
+    $ids_by_title = get_posts($args_title);
+
+    // B. Tìm theo META (Phone, Email)
+    $args_meta = array(
+        'post_type' => 'people',
+        'fields'    => 'ids',
+        'posts_per_page' => -1,
+        'meta_query' => array(
+            'relation' => 'OR', // Tìm thấy ở Phone HOẶC Email đều lấy
+            array(
+                'key'     => 'phone',
+                'value'   => $keyword,
+                'compare' => 'LIKE'
+            ),
+            array(
+                'key'     => 'email',
+                'value'   => $keyword,
+                'compare' => 'LIKE'
+            )
+        )
+    );
+    $ids_by_meta = get_posts($args_meta);
+
+    // C. Gộp ID và loại bỏ trùng lặp
+    $final_post_ids = array_unique( array_merge( $ids_by_title, $ids_by_meta ) );
+}
+
+// 3. TẠO QUERY CHÍNH (MAIN QUERY)
+// -----------------------------------------------------------
+$args = array(
+    'post_type'      => 'people',
+    'posts_per_page' => 12, 
+    'paged'          => $paged,
+    'orderby'        => 'menu_order',
+    'order'          => 'ASC',
+    'post_status'    => 'publish',
+);
+
+// Áp dụng kết quả tìm kiếm (Nếu có keyword)
+if ( $has_search ) {
+    if ( !empty($final_post_ids) ) {
+        $args['post__in'] = $final_post_ids; // Chỉ lấy các bài tìm thấy
+    } else {
+        $args['post__in'] = array(0); // Không tìm thấy gì -> Gán ID = 0 để trả về rỗng
+    }
+}
+
+// Áp dụng bộ lọc Lĩnh vực (Experience) - Logic AND
+if ( !empty($experience_filter) ) {
+    $args['meta_query'] = array(
+        array(
+            'key'     => 'assigned_experience_parent',
+            'value'   => '"' . $experience_filter . '"',
+            'compare' => 'LIKE'
+        )
+    );
+}
+
+// Thực hiện Query
+$the_query = new WP_Query( $args );
+
+// 4. TÍNH TOÁN SỐ LIỆU (Result Count)
+// -----------------------------------------------------------
+$posts_per_page = $the_query->query_vars['posts_per_page'];
+$total_posts    = $the_query->found_posts;
+$start_result   = ($paged - 1) * $posts_per_page + 1;
+$end_result     = min($paged * $posts_per_page, $total_posts);
+
+if ($total_posts == 0) $start_result = 0;
+
 ?>
 
 <div class="wapper-list-member">
@@ -24,13 +119,15 @@ get_header();
                     <div class="p-4 text-white">
                         <h2 class="text-3xl font-bold mb-4"><?php pll_e('s_tieu_de_tim_kiem'); ?></h2>
                         <div class="desc-find">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Error nemo atque corporis. Quod id dignissimos dicta totam sint placeat delectus expedita natus?
+                            <?php pll_e('s_mo_ta_tim_kiem'); ?>
                         </div>
                     </div>
                 </div>
-                <div class="col-span-2 p-4 flex align-center justify-center items-center">
+                <form role="search" method="get" action="<?php echo get_permalink(); ?>" class="col-span-2 p-4 flex align-center justify-center items-center flex-col">
                     <div class="el-search flex align-center items-center w-[80%] relative">
-                        <input type="text" class="w-full px-4 py-4 bg-[#414141] text-white text-base outline-none" placeholder="<?php pll_e('Tìm theo tên, từ khóa...'); ?>">
+                        <input type="text" 
+                            name="keyword" 
+                            value="<?php echo esc_attr($search_keyword); ?>" class="w-full px-4 py-4 bg-[#414141] text-white text-base outline-none" placeholder="<?php pll_e('s_placeholder_tim_kiem'); ?>">
                         <button type="submit" class="text-white absolute right-4">
                             <svg 
                             xmlns="http://www.w3.org/2000/svg" 
@@ -48,47 +145,110 @@ get_header();
                             </svg>
                         </button>
                     </div>
-                </div>
+                    <div class="w-[80%] mt-2 text-right">
+                        <a class="col-span-1 py-4 text-[#b6b6b6] underline" href="<?php echo get_permalink(); ?>">Clear Search <i class="fa-solid fa-arrows-rotate"></i></a>
+                    </div>
+                    
+                </form>
             </div>
 
             <div class="result-member">
-                <h4 class="my-[3rem]">Result 1 ~ 30 của 1000</h4>
-                <div class="list-member grid grid-cols-4 gap-6">
-                    <?php for ($i = 0; $i <= 15; $i++) { ?>
-                        <div class="member-item my-3">
-                            <a href="#" class="relative">
-                                <img src="https://dummyimage.com/200x250/737373/fff&text=KaiLash(270x270px)" 
-                                    alt="Nguyen Van A"
-                                    class="w-full h-[270px] object-cover transition-transform duration-500 group-hover:scale-105 border border-gray-300"
-                                >
-                                <!-- <img src="<?php echo get_template_directory_uri(); ?>/assets/images/members/member-1.jpg" alt="" class="w-full"> -->
-                                <div class="layer-gray absolute bottom-0 w-full h-full bg-[#000000] opacity-0 hover:opacity-50">
-                                    <p class="text-white absolute p-4 top-1/2 max-w-[270px] max-h-[110px] line-clamp-4 text-justify">
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat, natus tenetur accusantium saepe suscipit voluptates veritatis eaque iste ullam cum! Dignissimos, a ipsa? Commodi autem aut ipsum laborum repellendus ipsam.
-                                    </p>
-                                </div>
-                            </a>
-                            <div class="member-info my-3">
-                                <h3 class="text-[#125f4b] font-semibold text-3xl">Nguyễn Văn A</h3>
-                                <p class="text-[#125f4b] my-3"><span>Partner</span> | <span>HCM</span></p>
-                                <hr class="my-2 text-[#125f4b]">
-                                <div class="m-contact flex flex-row justify-between items-center">
-                                    <div class="m-phone ">
-                                        <i class="fa-solid fa-phone"></i>
-                                        <span><a href="tel:+84901234567" class="underline underline-offset-1">012 345 6789</a></span>
+                <?php if ( $the_query->have_posts() ) : ?>
+                    <h4 class="my-[3rem]"><?php printf( pll__('Hiển thị %s ~ %s của %s kết quả'), $start_result, $end_result, $total_posts ); ?></h4>
+                    <div class="list-member grid grid-cols-4 gap-6">
+                        <?php while ( $the_query->have_posts() ) : $the_query->the_post(); 
+                            // Lấy dữ liệu ACF thật
+                            $full_name = get_field('ho_ten');
+                            $position = get_field('position') ?? [];
+                            $phone = get_field('phone');
+                            $email = get_field('email');
+                            $link_fb = get_field('link_facebook');
+                            $link_linkedin = get_field('link_linkedin');
+                            $intro = get_field('mo_ta_ngan');
+                            $address_working = get_field('dia_diem_lam_viec');
+                            $address_working = $address_working ? $address_working : [];
+                            // var_dump($address_working);exit;
+                            $avatar = get_field('anh_dai_dien');
+                            $avatar = $avatar ? $avatar :  "https://dummyimage.com/200x250/05654a/fff&text=KaiLash(270x270px)";
+                        ?>
+                            <div class="member-item my-3">
+                                <a href="<?php the_permalink(); ?>" class="relative w-full aspect-[3/2] bg-gray-200">
+                                    <img src="<?php echo $avatar; ?>" 
+                                        alt="<?php echo $full_name; ?>"
+                                        class="w-full h-[270px] object-cover transition-transform duration-500 group-hover:scale-105 border border-gray-300"
+                                    >
+                                    <!-- <img src="<?php echo get_template_directory_uri(); ?>/assets/images/members/member-1.jpg" alt="" class="w-full"> -->
+                                    <div class="layer-gray absolute bottom-0 w-full h-full bg-[#000000] opacity-0 hover:opacity-50">
+                                        <p class="text-white absolute p-4 top-1/2 max-w-[270px] max-h-[110px] line-clamp-4 text-justify">
+                                            <?php echo $intro; ?>
+                                        </p>
                                     </div>
-                                    <div class="m-social">
-                                        <i class="fa-brands fa-facebook p-3 rounded-full bg-[#f1f1f1] hover:bg-[#125f4b] hover:text-white"></i>
-                                        <i class="fa-brands fa-linkedin p-3 rounded-full bg-[#f1f1f1] hover:bg-[#125f4b] hover:text-white"></i>
-                                        <i class="fa-solid fa-envelope p-3 rounded-full bg-[#f1f1f1] hover:bg-[#125f4b] hover:text-white"></i>
+                                </a>
+                                <div class="member-info my-3">
+                                    <a href="<?php the_permalink(); ?>"><h3 class="text-[#125f4b] font-semibold text-2xl"><?php echo $full_name; ?></h3></a>
+                                    <p class="text-[#2c3338] my-3"><span><?php echo implode(', ', $position); ?></span> | <span><?php echo implode(', ', $address_working); ?></span></p>
+                                    <hr class="my-2 text-[#125f4b]">
+                                    <div class="m-contact flex flex-row justify-between items-center">
+                                        
+                                        <div class="m-phone ">
+                                            <?php if ($phone != "") : ?>
+                                                <i class="fa-solid fa-phone  p-3 rounded-full bg-[#f1f1f1] hover:bg-[#125f4b] hover:text-white"></i>
+                                                <span><a href="tel:+84901234567" class="underline underline-offset-1"><?php echo $phone; ?></a></span>
+                                            <?php endif; ?>
+                                        </div>
+                                        
+                                        <div class="m-social">
+                                            <a target="_blank" href="<?php echo $link_fb; ?>"><i class="fa-brands fa-facebook p-3 rounded-full bg-[#f1f1f1] hover:bg-[#125f4b] hover:text-white"></i></a>
+                                            <a target="_blank" href="<?php echo $link_linkedin; ?>"><i class="fa-brands fa-linkedin p-3 rounded-full bg-[#f1f1f1] hover:bg-[#125f4b] hover:text-white"></i></a>
+                                            <a target="_blank" href="mailto:<?php echo $email; ?>"><i class="fa-solid fa-envelope p-3 rounded-full bg-[#f1f1f1] hover:bg-[#125f4b] hover:text-white"></i></a>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    <?php } ?>
-                </div>
+                        <?php endwhile; ?>
+                    </div>
+
+                    <div class="pagination mt-16 flex justify-center">
+                        <?php
+                        $links = paginate_links(array(
+                            'base'      => str_replace( 999999999, '%#%', esc_url( get_pagenum_link( 999999999 ) ) ),
+                            'format'    => '?paged=%#%',
+                            'current'   => max( 1, get_query_var( 'paged' ), get_query_var( 'page' ) ),
+                            'total'     => $the_query->max_num_pages,
+                            'prev_text' => '<i class="fa-solid fa-chevron-left"></i>',
+                            'next_text' => '<i class="fa-solid fa-chevron-right"></i>',
+                            'mid_size'  => 2,
+                            'type'      => 'array'
+                        ));
+
+                        if ( is_array( $links ) ) {
+                            echo '<ul class="flex gap-2">';
+                            foreach ( $links as $link ) {
+                                $link = str_replace('page-numbers', 'flex items-center justify-center p-3 w-[30px] h-[30px] rounded border border-gray-300 text-gray-600 hover:bg-[#125f4b] hover:text-white hover:border-[#125f4b] transition-colors', $link);
+                                $link = str_replace('current', '!bg-[#125f4b] !text-white !border-[#125f4b]', $link);
+                                echo '<li>' . $link . '</li>';
+                            }
+                            echo '</ul>';
+                        }
+                        ?>
+                    </div>
+                
+                    <?php 
+                        if (!is_post_type_archive('people')) {
+                            wp_reset_postdata();
+                        }
+                    ?>
+                <?php else : ?>
+                    <div class="text-center py-20 my-[3rem]">
+                        <p class="text-gray-500 text-lg"><?php pll_e('Không tìm thấy'); ?></p>
+                        <a href="<?php echo get_permalink(); ?>" class="inline-block mt-4 text-[#125f4b] underline hover:text-black">
+                            <?php pll_e('Xem tất cả'); ?>
+                        </a>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
+        
     </div>
 </div>
 

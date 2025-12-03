@@ -1,3 +1,16 @@
+<?php
+    $args = array(
+                'post_type'      => 'people',
+                'posts_per_page' => 20, // Số lượng muốn hiển thị (Ví dụ: 4 hoặc 8). Điền -1 nếu muốn lấy hết.
+                'orderby'        => 'menu_order', // Sắp xếp theo thứ tự bạn chỉnh trong Admin
+                'order'          => 'ASC',
+                'post_status'    => 'publish',
+            );
+    // Khởi tạo Query
+    $home_people_query = new WP_Query($args);
+
+?>
+
 <section class="bg-[#0e5644] mt-[3em] relative" id="people">
     <div class="wapper-people grid grid-cols-4">
         <div class="wapper-slide-people col-span-2" id="slides-top-people">
@@ -47,63 +60,31 @@
 
     <div class="list-people bg-white absolute w-[90%] min-h-[400px] bottom-[5rem] text-center z-[10]">
         <div id="list-people" class="p-[3rem]">
-            <div class="p-item mt-[2.5em]">
-                <div class="overflow-hidden mb-4 relative flex justify-center">
-                    <img src="https://dummyimage.com/200x250/737373/fff&text=200x250px" 
-                        alt="Nguyen Van A"
-                        class="w-[200px] h-[250px] object-cover transition-transform duration-500 group-hover:scale-105 border border-gray-300"
-                    >
-                </div>
+            <?php
+                if ($home_people_query->have_posts()) :
+                    while ($home_people_query->have_posts()) : $home_people_query->the_post();
+                        
+                        // Lấy dữ liệu ACF
+                        $position = get_field('position');
+                        $full_name = get_field('ho_ten');
+                        $avatar = get_field('anh_dai_dien');
+                        $avatar = $avatar ? $avatar :  "https://dummyimage.com/200x250/05654a/fff&text=KaiLash(270x270px)";
+            ?>
+                        <div class="p-item mt-[2.5em]">
+                            <div class="overflow-hidden mb-4 relative flex justify-center">
+                                <img src="<?php echo $avatar; ?>" 
+                                    alt="<?php echo $full_name; ?>"
+                                    class="w-[200px] h-[250px] object-cover transition-transform duration-500 group-hover:scale-105 border border-gray-300"
+                                >
+                            </div>
 
-                <h3 class="text-2xl font-gilda text-gray-900 mb-1">Doãn Đức Thành 1</h3>
-                <p class="text-sm font-nunito font-bold text-gray-400 uppercase tracking-widest">CEO & Founder</p>
-            </div>
-            <div class="p-item mt-[2.5em]">
-                <div class="overflow-hidden mb-4 w-full relative flex justify-center">
-                    <img src="https://dummyimage.com/200x250/737373/fff&text=200x250px" 
-                        alt="Nguyen Van A"
-                        class="w-[200px] h-[250px] object-cover transition-transform duration-500 group-hover:scale-105"
-                    >
-                </div>
-
-                <h3 class="text-2xl font-gilda text-gray-900 mb-1">Doãn Đức Thành 2</h3>
-                <p class="text-sm font-nunito font-bold text-gray-400 uppercase tracking-widest">CEO & Founder</p>
-            </div>
-            <div class="p-item mt-[2.5em]">
-                <div class="overflow-hidden mb-4 w-full relative flex justify-center">
-                    <img src="https://dummyimage.com/200x250/737373/fff&text=200x250px" 
-                        alt="Nguyen Van A"
-                        class="w-[200px] h-[250px] object-cover transition-transform duration-500 group-hover:scale-105"
-                    >
-                </div>
-
-                <h3 class="text-2xl font-gilda text-gray-900 mb-1">Doãn Đức Thành 3</h3>
-                <p class="text-sm font-nunito font-bold text-gray-400 uppercase tracking-widest">CEO & Founder</p>
-            </div>
-
-            <div class="p-item mt-[2.5em]">
-                <div class="overflow-hidden mb-4 w-full relative flex justify-center">
-                    <img src="https://dummyimage.com/200x250/737373/fff&text=200x250px" 
-                        alt="Nguyen Van A"
-                        class="w-[200px] h-[250px] object-cover transition-transform duration-500 group-hover:scale-105"
-                    >
-                </div>
-
-                <h3 class="text-2xl font-gilda text-gray-900 mb-1">Doãn Đức Thành 4</h3>
-                <p class="text-sm font-nunito font-bold text-gray-400 uppercase tracking-widest">CEO & Founder</p>
-            </div>
-
-            <div class="p-item mt-[2.5em]">
-                <div class="overflow-hidden mb-4 w-full relative flex justify-center">
-                    <img src="https://dummyimage.com/200x250/737373/fff&text=200x250px" 
-                        alt="Nguyen Van A"
-                        class="w-[200px] h-[250px] object-cover transition-transform duration-500 group-hover:scale-105"
-                    >
-                </div>
-
-                <h3 class="text-2xl font-gilda text-gray-900 mb-1">Doãn Đức Thành 5</h3>
-                <p class="text-sm font-nunito font-bold text-gray-400 uppercase tracking-widest">CEO & Founder</p>
-            </div>
+                            <h3 class="text-2xl font-gilda text-gray-900 mb-1"><?php echo $full_name; ?></h3>
+                            <p class="text-sm font-nunito font-bold text-gray-400 uppercase tracking-widest"><?php echo implode(', ', $position); ?></p>
+                        </div>
+            <?php
+                    endwhile;
+                endif;
+            ?>
         </div>
     </div>
 </section>
