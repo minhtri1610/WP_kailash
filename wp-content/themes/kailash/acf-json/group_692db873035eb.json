@@ -227,7 +227,7 @@
         {
             "key": "field_692fe439dd06b",
             "label": "Ngôn ngữ",
-            "name": "ngon_ngữ",
+            "name": "ngon_ngu",
             "aria-label": "",
             "type": "select",
             "instructions": "",
@@ -486,5 +486,5 @@
     "description": "",
     "show_in_rest": 0,
     "display_title": "",
-    "modified": 1764775955
+    "modified": 1764864998
 }

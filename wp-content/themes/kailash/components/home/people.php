@@ -50,7 +50,7 @@
             <div class="text-gray-700 ml-4 flex items-baseline gap-2">
                 <span class="text-white font-gilda text-[3rem] mr-2 -translate-y-1"><?php pll_e('Chuyên gia'); ?></span>
                 
-                <span class="text-white font-gilda text-[12rem] leading-none" counter-element="number">100</span>
+                <span class="text-white font-gilda text-[12rem] leading-none" counter-element="number"><?php echo $home_people_query->found_posts; ?></span>
                 
                 <span class="text-white font-gilda text-[8rem] -translate-y-2">+</span>
             </div>

@@ -21,10 +21,16 @@ $is_level_1 = ($post_parent_id == 0);
 <div class="wrapper-single-experience py-10">
     <div class="head-banner mb-3">
         <?php if (has_post_thumbnail()) : ?>
-            <div class="w-full max-h-[300px]">
+            <div class="w-full max-h-[300px] relative">
                 <a href="<?php the_permalink(); ?>" class="block overflow-hidden rounded-lg">
                     <?php the_post_thumbnail('large', ['class' => 'w-full h-[300px] object-cover hover:scale-105 transition-transform duration-500']); ?>
                 </a>
+                <div class="container mx-auto px-5 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                    <h1 class="text-3xl md:text-5xl font-bold text-white mb-6 py-3 px-6 w-fit bg-gradient-to-r from-[#125f4b] to-[#125f4b]/0 border-l-4 border-[#ffffff] rounded-r-lg                                   ">
+                        <?php the_title(); ?>
+                    </h1>
+                    <!-- <h1 class="text-3xl md:text-5xl font-bold text-[#fff] mb-6 p-3 bg-[#125f4bbe] w-fit"><?php the_title(); ?></h1> -->
+                </div>  
             </div>
         <?php else : ?>
             <img class="w-full h-[300px] object-cover hover:scale-105 transition-transform duration-500" src="https://dummyimage.com/380x240/737373/fff&text=1250x300px" />
@@ -55,17 +61,92 @@ $is_level_1 = ($post_parent_id == 0);
                 
                 <!-- CỘT TRÁI: NỘI DUNG CHÍNH (Chiếm 2/3) -->
                 <div class="col-span-1 lg:col-span-2">
-                    <header class="entry-header mb-6">
+                    <!-- <header class="entry-header mb-6">
                         <h1 class="text-3xl md:text-4xl font-bold text-[#125f4b] mb-4"><?php the_title(); ?></h1>
                         <?php if (has_excerpt()) : ?>
                             <div class="text-lg text-gray-600 italic border-l-4 border-[#125f4b] pl-4">
                                 <?php the_excerpt(); ?>
                             </div>
                         <?php endif; ?>
-                    </header>
+                    </header> -->
 
                     <div class="entry-content prose max-w-none text-gray-800 leading-relaxed">
-                        <?php the_content(); ?>
+                        <?php 
+                            $content = get_the_content();
+                            if ( !empty( $content ) && trim( $content ) !== "" ) {
+                                the_content(); 
+                            } else {
+                        ?>
+                            <div class="updating-notice py-8 px-6 bg-gray-50 border border-dashed border-gray-300 rounded-lg text-center">
+                                <div class="text-4xl text-gray-300 mb-2">
+                                    <i class="fa-solid fa-pen-to-square"></i> <!-- Icon (nếu có fontawesome) -->
+                                </div>
+                                <p class="text-gray-500 italic">
+                                    <?php pll_e('Nội dung đang được cập nhật...'); ?>
+                                </p>
+                            </div>
+                        <?php } ?>
+                    </div>
+
+                    <div class="text-left mx-auto my-12">
+                        <h2 class="text-2xl font-bold mb-8 uppercase tracking-wide text-[#aa7d59] border-b border-b-[#dcdcdc] pb-2.5">
+                            <?php pll_e('Dự án gần đây'); ?>
+                        </h2>
+                        <div class="text-xl text-gray-600 leading-relaxed">
+                            <p class="text-center text-gray-500">Đang cập nhật danh sách dự án.</p>
+                        </div>
+                    </div>
+
+                    <!-- 2. DANH SÁCH CỘNG SỰ (PEOPLE) -->
+                    <!-- Logic: Tìm People có field 'assigned_experience_parent' chứa ID bài này -->
+
+                    <div class="text-left mx-auto mb-12">
+                        <div class="">
+                            <h2 class="text-2xl font-bold mb-8 uppercase tracking-wide text-[#aa7d59] border-b border-b-[#dcdcdc] pb-2.5">
+                                <?php pll_e('Đội ngũ phụ trách'); ?>
+                            </h2>
+
+                            <?php
+                            $people_args = array(
+                                'post_type'      => 'people',
+                                'posts_per_page' => -1,
+                                'meta_query'     => array(
+                                    array(
+                                        'key'     => 'linh_vuc_phu_trach',
+                                        'value'   => '"' . $current_id . '"',
+                                        'compare' => 'LIKE'
+                                    )
+                                )
+                            );
+                            $people_query = new WP_Query($people_args);
+
+                            if ($people_query->have_posts()) : ?>
+                                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                                    <?php while ($people_query->have_posts()) : $people_query->the_post(); ?>
+                                        <div class="people-card text-center group p-3 shadow-[5px_4px_7px_2px_#ddd]">
+                                            <a href="<?php the_permalink(); ?>" class="block">
+                                                <div class="rounded-full overflow-hidden w-32 h-32 mx-auto mb-4 border-2 border-transparent group-hover:border-[#125f4b] transition-all">
+                                                    <?php 
+                                                    if (has_post_thumbnail()) {
+                                                        the_post_thumbnail('thumbnail', ['class' => 'w-full h-full object-cover']);
+                                                    } else {
+                                                        echo '<img src="https://dummyimage.com/150x150" class="w-full h-full object-cover">';
+                                                    }
+                                                    ?>
+                                                </div>
+                                                <h4 class="font-bold text-lg text-gray-900 group-hover:text-[#125f4b] transition"><?php the_title(); ?></h4>
+                                                <div class="text-sm text-gray-500 mt-1 uppercase tracking-wider">Partner</div>
+                                            </a>
+                                        </div>
+                                    <?php endwhile; ?>
+                                </div>
+                            <?php 
+                            else:
+                                echo '<p class="text-center text-gray-500">Đang cập nhật danh sách nhân sự.</p>';
+                            endif;
+                            wp_reset_postdata();
+                            ?>
+                        </div>
                     </div>
                 </div>
 
@@ -94,8 +175,10 @@ $is_level_1 = ($post_parent_id == 0);
             
             <div class="level-1-layout">
                 <!-- Header Level 1 -->
-                <div class="text-center max-w-4xl mx-auto mb-12">
-                    <h1 class="text-4xl md:text-5xl font-bold text-[#125f4b] mb-6"><?php the_title(); ?></h1>
+                <div class="text-left mx-auto mb-12">
+                    <h2 class="text-2xl font-bold mb-8 uppercase tracking-wide text-[#aa7d59] border-b border-b-[#dcdcdc] pb-2.5">
+                        <?php pll_e('Các lĩnh vực chuyên môn'); ?>
+                    </h2>
                     <div class="text-xl text-gray-600 leading-relaxed">
                         <?php the_content(); ?>
                     </div>
@@ -103,9 +186,6 @@ $is_level_1 = ($post_parent_id == 0);
 
                 <!-- 1. DANH SÁCH CÁC MỤC CON (LEVEL 2) -->
                 <div class="mb-16">
-                    <h2 class="text-2xl font-bold mb-8 text-center uppercase tracking-wide text-gray-800">
-                        <?php pll_e('Các lĩnh vực chuyên môn'); ?>
-                    </h2>
                     
                     <?php
                     $children_args = array(
@@ -135,18 +215,18 @@ $is_level_1 = ($post_parent_id == 0);
                         </div>
                     <?php 
                     wp_reset_postdata();
+                    else : 
+                        echo '<p class="text-center text-gray-500">Đang cập nhật nội dung.</p>';
                     endif; 
                     ?>
                 </div>
 
-
-
                 <!-- 2. DANH SÁCH CỘNG SỰ (PEOPLE) -->
                 <!-- Logic: Tìm People có field 'assigned_experience_parent' chứa ID bài này -->
 
-                <!-- <div class="bg-gray-50 -mx-4 px-4 py-16">
-                    <div class="container mx-auto">
-                        <h2 class="text-2xl font-bold mb-8 text-center uppercase tracking-wide text-gray-800">
+                <div class="text-left mx-auto mb-12">
+                    <div class="">
+                        <h2 class="text-2xl font-bold mb-8 uppercase tracking-wide text-[#aa7d59] border-b border-b-[#dcdcdc] pb-2.5">
                             <?php pll_e('Đội ngũ phụ trách'); ?>
                         </h2>
 
@@ -156,7 +236,7 @@ $is_level_1 = ($post_parent_id == 0);
                             'posts_per_page' => -1,
                             'meta_query'     => array(
                                 array(
-                                    'key'     => 'assigned_experience_parent',
+                                    'key'     => 'linh_vuc_phu_trach',
                                     'value'   => '"' . $current_id . '"',
                                     'compare' => 'LIKE'
                                 )
@@ -167,14 +247,14 @@ $is_level_1 = ($post_parent_id == 0);
                         if ($people_query->have_posts()) : ?>
                             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                                 <?php while ($people_query->have_posts()) : $people_query->the_post(); ?>
-                                    <div class="people-card text-center group">
+                                    <div class="people-card text-center group p-3 shadow-[5px_4px_7px_2px_#ddd]">
                                         <a href="<?php the_permalink(); ?>" class="block">
                                             <div class="rounded-full overflow-hidden w-32 h-32 mx-auto mb-4 border-2 border-transparent group-hover:border-[#125f4b] transition-all">
                                                 <?php 
                                                 if (has_post_thumbnail()) {
                                                     the_post_thumbnail('thumbnail', ['class' => 'w-full h-full object-cover']);
                                                 } else {
-                                                    echo '<img src="https://via.placeholder.com/150" class="w-full h-full object-cover">';
+                                                    echo '<img src="https://dummyimage.com/150x150" class="w-full h-full object-cover">';
                                                 }
                                                 ?>
                                             </div>
@@ -191,7 +271,18 @@ $is_level_1 = ($post_parent_id == 0);
                         wp_reset_postdata();
                         ?>
                     </div>
-                </div> -->
+                </div>
+
+                <div class="text-left mx-auto mb-12">
+                    <div class="text-left mx-auto mb-12">
+                        <h2 class="text-2xl font-bold mb-8 uppercase tracking-wide text-[#aa7d59] border-b border-b-[#dcdcdc] pb-2.5">
+                            <?php pll_e('Dự án gần đây'); ?>
+                        </h2>
+                        <div class="list-rencent-projects">
+                            <p class="text-center text-gray-500">Đang cập nhật danh sách dự án.</p>
+                        </div>
+                    </div>
+                </div>
 
             </div>
 
