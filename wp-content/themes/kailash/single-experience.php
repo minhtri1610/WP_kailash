@@ -18,7 +18,7 @@ $post_parent_id = $post->post_parent; // Nếu = 0 là Level 1, > 0 là Level 2
 $is_level_1 = ($post_parent_id == 0);
 ?>
 
-<div class="wrapper-single-experience py-10">
+<div class="wrapper-single-experience">
     <div class="head-banner mb-3">
         <?php if (has_post_thumbnail()) : ?>
             <div class="w-full max-h-[300px] relative">

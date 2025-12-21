@@ -38,7 +38,7 @@ $cong_trinh_nckh = get_field('cong_trinh_nckh');
 $related_experiences = get_field('assigned_experience_parent');
 ?>
 
-<div class="wrapper-single-experience py-10">
+<div class="wrapper-single-experience">
     <div class="container mx-auto px-4">
         <!-- BREADCRUMB (Điều hướng tổng quát) -->
         <?php 

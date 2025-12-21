@@ -39,13 +39,13 @@ get_header(); // Tải file header.php
                         ?>
 
                         <!-- BLOCK CHO MỖI LEVEL 1 -->
-                        <div class="experience-group-block border-b border-gray-200 pb-10 last:border-0 grid grid-cols-4 gap-4">
+                        <div class="experience-group-block border-b border-gray-200 pb-10 last:border-0 grid grid-cols-3 gap-4">
 
                             <div class="img-experience col-span-1">
                                 <?php if (has_post_thumbnail()) : ?>
                                     <div class="w-full">
                                         <a href="<?php the_permalink(); ?>" class="block overflow-hidden rounded-lg">
-                                            <?php the_post_thumbnail('large', ['class' => '!w-full h-auto object-cover hover:scale-105 transition-transform duration-500']); ?>
+                                            <?php the_post_thumbnail('large', ['class' => '!w-full min-h-[240px] object-cover hover:scale-105 transition-transform duration-500']); ?>
                                         </a>
                                     </div>
                                 <?php else : ?>
@@ -54,9 +54,9 @@ get_header(); // Tải file header.php
                                 
                             </div>
 
-                            <div class="list-experience col-span-3">
+                            <div class="list-experience col-span-2">
                                 <!-- Hiển thị thông tin LEVEL 1 -->
-                                <div class="level-1-info mb-8">
+                                <div class="level-1-info mb-4">
                                     <h3 class="text-xl font-semibold text-[#aa7d59] mb-4">
                                         <a href="<?php the_permalink(); ?>" class="hover:underline ">
                                             <?php the_title(); ?>
