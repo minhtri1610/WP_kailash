@@ -60,6 +60,7 @@ function register_my_cpts() {
         'show_in_rest' => true,
         'menu_icon' => 'dashicons-book',
         'menu_position' => 15,
+        'taxonomies'  => array( 'post_tag' ), 
     ));
 }
 add_action( 'init', 'register_my_cpts' );

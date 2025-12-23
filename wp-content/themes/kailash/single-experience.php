@@ -36,7 +36,7 @@ $is_level_1 = ($post_parent_id == 0);
             <img class="w-full h-[300px] object-cover hover:scale-105 transition-transform duration-500" src="https://dummyimage.com/380x240/737373/fff&text=1250x300px" />
         <?php endif; ?>
     </div>
-    <div class="container mx-auto px-4">
+    <div class="container mx-auto px-4 mb-[5rem]">
         <!-- BREADCRUMB (Điều hướng tổng quát) -->
         <?php 
         if (function_exists('kailash_breadcrumbs')) {
@@ -100,7 +100,7 @@ $is_level_1 = ($post_parent_id == 0);
                     <!-- 2. DANH SÁCH CỘNG SỰ (PEOPLE) -->
                     <!-- Logic: Tìm People có field 'assigned_experience_parent' chứa ID bài này -->
 
-                    <div class="text-left mx-auto mb-12">
+                    <div class="text-left mx-auto mb-[5rem]">
                         <div class="">
                             <h2 class="text-2xl font-bold mb-8 uppercase tracking-wide text-[#aa7d59] border-b border-b-[#dcdcdc] pb-2.5">
                                 <?php pll_e('Đội ngũ phụ trách'); ?>
@@ -224,7 +224,7 @@ $is_level_1 = ($post_parent_id == 0);
                 <!-- 2. DANH SÁCH CỘNG SỰ (PEOPLE) -->
                 <!-- Logic: Tìm People có field 'assigned_experience_parent' chứa ID bài này -->
 
-                <div class="text-left mx-auto mb-12">
+                <div class="text-left mx-auto mb-[5rem]">
                     <div class="">
                         <h2 class="text-2xl font-bold mb-8 uppercase tracking-wide text-[#aa7d59] border-b border-b-[#dcdcdc] pb-2.5">
                             <?php pll_e('Đội ngũ phụ trách'); ?>

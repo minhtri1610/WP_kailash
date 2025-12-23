@@ -96,7 +96,7 @@ $related_experiences = get_field('assigned_experience_parent');
             </div>
         </div>
     </div>
-    <div class="container mx-auto px-4 relative">
+    <div class="container mx-auto py-4 relative mb-[5rem]">
         <div class="content-desc absolute w-full bg-white p-10 h-30vh z-[3] -top-[10vh] shadow-[1px_3px_3px_1px] shadow-[#dcdcdc]">
                             
             <?php 

@@ -106,7 +106,7 @@ if ($total_posts == 0) $start_result = 0;
 ?>
 
 <div class="wapper-list-member">
-    <div class="container c-list-member mb-[100px]">
+    <div class="container c-list-member mb-12">
         <div class="head-list-member">
             <h2 class="text-4xl font-semibold text-black my-[3rem]"><?php pll_e('Cộng sự') ?> </h2>
         </div>

@@ -11,7 +11,7 @@ get_header(); // Tải file header.php
 ?>
 
 <div class="wapper-list-experience">
-    <div class="container c-list-experience mb-[100px]">
+    <div class="container c-list-experience mb-12">
         <div class="head-list-experience">
             <h2 class="text-4xl font-semibold text-black my-[3rem]"><?php pll_e('Dịch vụ') ?> </h2>
         </div>
