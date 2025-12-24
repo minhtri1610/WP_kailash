@@ -31,7 +31,7 @@ if ( is_post_type_archive('knowledge') && !is_page() ) {
 }
 ?>
 
-<div class="wrapper-archive-knowledge bg-gray-50 min-h-screen">
+<div class="wrapper-archive-knowledge min-h-screen">
     <div class="container mx-auto px-4">
         <!-- HEADER -->
         <div class="text-left mb-12">
@@ -52,7 +52,7 @@ if ( is_post_type_archive('knowledge') && !is_page() ) {
                     $authors = get_field('knowledge_authors');
                     $post_tags = get_the_tags();
                 ?>
-                    <article class="knowledge-card flex flex-col bg-white rounded-lg shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden group h-full border border-gray-100">
+                    <article class="knowledge-card flex flex-col bg-gray-50 rounded-lg shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden group h-full border border-gray-100">
                         
                         <!-- ẢNH ĐẠI DIỆN -->
                         <a href="<?php the_permalink(); ?>" class="block relative overflow-hidden aspect-[16/9]">

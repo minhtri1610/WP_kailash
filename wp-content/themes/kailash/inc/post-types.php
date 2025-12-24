@@ -137,3 +137,11 @@ add_action( 'init', 'register_my_cpts' );
 //     ));
 // }
 // add_action( 'init', 'register_my_cpts' );
+
+/**
+ * Kích hoạt Excerpt (Tóm tắt) cho Page
+ */
+function kailash_add_excerpt_support_for_page() {
+    add_post_type_support( 'page', 'excerpt' );
+}
+add_action( 'init', 'kailash_add_excerpt_support_for_page' );

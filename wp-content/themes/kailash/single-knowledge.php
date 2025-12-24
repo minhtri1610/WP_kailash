@@ -110,6 +110,7 @@ $post_tags = get_the_tags();
                                 $auth_name = get_the_title($auth_id);
                                 $auth_link = get_permalink($auth_id);
                                 $auth_pos  = get_field('position', $auth_id); // Chức vụ
+                                $str_auth_pos = !empty($auth_pos) ? implode(',', $auth_pos) : '';
                                 
                                 // Lấy ảnh
                                 $auth_avatar = get_field('anh_dai_dien', $auth_id);
@@ -124,8 +125,8 @@ $post_tags = get_the_tags();
                                         <h4 class="font-bold text-gray-900 text-lg leading-tight group-hover:text-[#125f4b] transition-colors">
                                             <a href="<?php echo $auth_link; ?>"><?php echo esc_html($auth_name); ?></a>
                                         </h4>
-                                        <?php if ($auth_pos): ?>
-                                            <p class="text-xs text-gray-500 uppercase tracking-wide mt-1"><?php echo esc_html($auth_pos); ?></p>
+                                        <?php if ($str_auth_pos): ?>
+                                            <p class="text-xs text-gray-500 uppercase tracking-wide mt-1"><?php echo $str_auth_pos; ?></p>
                                         <?php endif; ?>
                                         
                                         <a href="<?php echo $auth_link; ?>" class="text-xs text-[#125f4b] font-medium mt-2 inline-block hover:underline">

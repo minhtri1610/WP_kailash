@@ -8,6 +8,28 @@
  *
  * @package kailash
  */
+
+$settings_page = get_page_by_path('theme-settings');
+$option_id = $settings_page ? $settings_page->ID : false;
+if (!$option_id) $option_id = get_option('page_on_front'); // Fallback
+
+// Lấy ngôn ngữ hiện tại
+$lang = function_exists('pll_current_language') ? pll_current_language() : 'vi';
+
+// Lấy dữ liệu Text (Có dịch)
+$company_name    = get_field('company_name_' . $lang, $option_id);
+$tax_id          = get_field('tax_id', $option_id); // MST thường không đổi
+$company_address = get_field('company_address_' . $lang, $option_id);
+
+// Fallback
+if (!$company_name)    $company_name = get_field('company_name', $option_id);
+if (!$company_address) $company_address = get_field('company_address', $option_id);
+
+// Lấy dữ liệu Số/Link (Dùng chung)
+$company_phone   = get_field('company_phone', $option_id);
+$company_email   = get_field('company_email', $option_id);
+$social_facebook = get_field('social_facebook', $option_id);
+$social_linkedin = get_field('link_linkedin', $option_id);
 ?>
 	<footer id="site-footer" class="bg-gradient-to-b from-[#016549] to-[#003425] pt-10 relative">
 		<div class="wapper-footer container">
@@ -23,20 +45,70 @@
 				?>
 			</div>
 			<div class="footer-info my-4">
-				<h2 class="font-bold text-3xl text-white">Kailash</h2>
+				<h2 class="font-bold text-3xl text-white mb-2">
+                    <?php echo $company_name ? esc_html($company_name) : 'Kailash'; ?>
+                </h2>
 				<p class="text-white text-base pb-5">Investment & Corporate Governance Counsel</p>
-				<p class="text-[#dfdfdf] text-base pb-3"><i class="fa-solid fa-barcode"></i> <?php pll_e('Mã số thuế'); ?> : <a href="tel:+84901234567" class="underline underline-offset-1">0123456789</a></p>
-				<p class="text-[#dfdfdf] text-base pb-3"><i class="fa-solid fa-mobile-screen-button"></i> <?php pll_e('Liên hệ'); ?>: <a href="tel:+84901234567" class="underline underline-offset-1">012 345 6789</a> | <i class="fa-regular fa-envelope"></i> <?php pll_e('Email'); ?>: <a href="mailto:xxx@xxx" class="underline underline-offset-1">xxx@xxx</a></p>
-				<p class="text-[#dfdfdf] text-base pb-3"><i class="fa-regular fa-building"></i> <?php pll_e('Địa chỉ'); ?>: xxx - xxx - Hồ Chí Minh</p>
+				<?php if($tax_id): ?>
+                <p class="text-[#dfdfdf] text-base pb-3">
+                    <i class="fa-solid fa-barcode w-6 text-center"></i> 
+                    <?php pll_e('Mã số thuế'); ?>: 
+                    <span class="font-medium"><?php echo esc_html($tax_id); ?></span>
+                </p>
+				<?php endif; ?>
+				<!-- Liên hệ & Email -->
+                <p class="text-[#dfdfdf] text-base pb-3 flex flex-wrap gap-y-2">
+                    <?php if($company_phone): ?>
+                    <span class="mr-4">
+                        <i class="fa-solid fa-mobile-screen-button w-6 text-center"></i> 
+                        <?php pll_e('Liên hệ'); ?>: 
+                        <a href="tel:<?php echo esc_attr($company_phone); ?>" class="underline underline-offset-1 hover:text-white transition-colors">
+                            <?php echo esc_html($company_phone); ?>
+                        </a>
+                    </span>
+                    <?php endif; ?>
+
+                    <?php if($company_email): ?>
+                    <span>
+                        <span class="hidden md:inline">|</span> 
+                        <i class="fa-regular fa-envelope w-6 text-center ml-0 md:ml-2"></i> 
+                        <?php pll_e('Email'); ?>: 
+                        <a href="mailto:<?php echo esc_attr($company_email); ?>" class="underline underline-offset-1 hover:text-white transition-colors">
+                            <?php echo esc_html($company_email); ?>
+                        </a>
+                    </span>
+                    <?php endif; ?>
+                </p>
+				<!-- Địa chỉ -->
+                <?php if($company_address): ?>
+                <p class="text-[#dfdfdf] text-base pb-3">
+                    <i class="fa-regular fa-building w-6 text-center"></i> 
+                    <?php pll_e('Địa chỉ'); ?>: 
+                    <?php echo esc_html($company_address); ?>
+                </p>
+                <?php endif; ?>
 			</div>
 			<div class="list-social-media">
 				<ul class="flex flex-row">
-					<li class="mr-3"><a href=""><i class="fa-brands fa-facebook text-[#dfdfdf] text-3xl"></i></a></li>
-					<li ><a href=""><i class="fa-brands fa-linkedin text-[#dfdfdf] text-3xl"></i></a></li>
+					<?php if($social_facebook): ?>
+                    <li class="mr-4">
+                        <a href="<?php echo esc_url($social_facebook); ?>" target="_blank" class="block hover:-translate-y-1 transition-transform">
+                            <i class="fa-brands fa-facebook text-[#dfdfdf] hover:text-white text-3xl"></i>
+                        </a>
+                    </li>
+                    <?php endif; ?>
+
+                    <?php if($social_linkedin): ?>
+                    <li>
+                        <a href="<?php echo esc_url($social_linkedin); ?>" target="_blank" class="block hover:-translate-y-1 transition-transform">
+                            <i class="fa-brands fa-linkedin text-[#dfdfdf] hover:text-white text-3xl"></i>
+                        </a>
+                    </li>
+                    <?php endif; ?>
 				</ul>
 			</div>
 			<div class="copyright text-center pb-3">
-				<p class="text-[#dfdfdf] text-base">© 2025 Kailash. All rights reserved.</p>
+				<p class="text-[#dfdfdf] text-base">© 2025 <?php echo $company_name ? esc_html($company_name) : 'Kailash'; ?>. All rights reserved.</p>
 			</div>
 		</div>
 		<div class="footer-arrows">
